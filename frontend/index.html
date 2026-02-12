@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocioEasy - Unified Social Media API</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .glow {
+            box-shadow: 0 0 40px rgba(96, 165, 250, 0.15);
+        }
+        .code-block {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+        }
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .faq-content.active {
+            max-height: 500px;
+        }
+        .rotate-icon {
+            transition: transform 0.3s ease;
+        }
+        .rotate-icon.active {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-[#0f172a]/80 backdrop-blur-md border-b border-slate-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2 group cursor-pointer">
+                    <span class="text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">✱</span>
+                    <span class="text-xl font-semibold tracking-tight">SocioEasy</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="text-slate-400 hover:text-white transition-colors text-sm font-medium">Features</a>
+                    <a href="#how-it-works" class="text-slate-400 hover:text-white transition-colors text-sm font-medium">How it Works</a>
+                    <a href="#faq" class="text-slate-400 hover:text-white transition-colors text-sm font-medium">FAQ</a>
+                    <a href="#" onclick="alert('Docs coming soon!')" class="text-slate-400 hover:text-white transition-colors text-sm font-medium">Docs</a>
+                </div>
+                <button onclick="showSignup()" class="bg-white text-slate-900 px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-200 transition-all transform hover:scale-105">
+                    Get Started
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-blue-900/20 via-transparent to-transparent pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-4xl mx-auto">
+                <div class="inline-flex items-center space-x-2 mb-6 px-4 py-2 rounded-full bg-slate-800/50 border border-slate-700/50 backdrop-blur-sm">
+                    <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                    <span class="text-sm text-slate-300">Now supporting 13+ platforms</span>
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-tight">
+                    The social media API that replaces<br>
+                    <span class="gradient-text">13 integrations.</span>
+                </h1>
+                
+                <p class="text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+                    We handle approvals, rate limits, and API changes. One endpoint to post, schedule, pull analytics, and reply to DMs and comments.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <button onclick="showSignup()" class="w-full sm:w-auto bg-white text-slate-900 px-8 py-4 rounded-full text-lg font-semibold hover:bg-slate-200 transition-all transform hover:scale-105 shadow-lg shadow-white/10">
+                        Get Started
+                    </button>
+                    <button onclick="alert('API Documentation coming soon!')" class="w-full sm:w-auto px-8 py-4 rounded-full text-lg font-semibold border border-slate-700 hover:border-slate-500 hover:bg-slate-800/50 transition-all text-slate-300">
+                        View Documentation
+                    </button>
+                </div>
+                
+                <p class="mt-6 text-sm text-slate-500">No credit card required</p>
+            </div>
+        </div>
+
+        <div class="absolute top-1/4 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-1/4 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="py-20 lg:py-32 bg-slate-900/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">How It Works</h2>
+                <p class="text-slate-400">Get up and running in minutes, not months</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 lg:gap-12">
+                <div class="relative group">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur opacity-0 group-hover:opacity-20 transition duration-500"></div>
+                    <div class="relative bg-slate-800/50 border border-slate-700/50 rounded-2xl p-8 hover-lift">
+                        <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center mb-6 text-blue-400 font-bold text-xl">1</div>
+                        <h3 class="text-xl font-semibold mb-3">Get your API key</h3>
+                        <p class="text-slate-400 leading-relaxed">Sign up and grab your key. Takes 30 seconds.</p>
+                    </div>
+                </div>
+
+                <div class="relative group">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl blur opacity-0 group-hover:opacity-20 transition duration-500"></div>
+                    <div class="relative bg-slate-800/50 border border-slate-700/50 rounded-2xl p-8 hover-lift">
+                        <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center mb-6 text-purple-400 font-bold text-xl">2</div>
+                        <h3 class="text-xl font-semibold mb-3">Connect accounts</h3>
+                        <p class="text-slate-400 leading-relaxed">Link social accounts via OAuth. No developer apps needed.</p>
+                    </div>
+                </div>
+
+                <div class="relative group">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-pink-600 to-blue-600 rounded-2xl blur opacity-0 group-hover:opacity-20 transition duration-500"></div>
+                    <div class="relative bg-slate-800/50 border border-slate-700/50 rounded-2xl p-8 hover-lift">
+                        <div class="w-12 h-12 bg-pink-500/20 rounded-xl flex items-center justify-center mb-6 text-pink-400 font-bold text-xl">3</div>
+                        <h3 class="text-xl font-semibold mb-3">Start posting</h3>
+                        <p class="text-slate-400 leading-relaxed">One API call to publish everywhere.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section id="features" class="py-20 lg:py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">What You Can Do</h2>
+                <p class="text-slate-400">Everything you need to manage social media at scale</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                <div class="code-block rounded-2xl p-6 lg:p-8 hover-lift group cursor-pointer">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <span class="text-green-400 font-mono text-sm font-bold">POST</span>
+                            <span class="text-slate-300 font-mono text-sm ml-2">/posts</span>
+                        </div>
+                        <i data-lucide="share-2" class="w-5 h-5 text-slate-500 group-hover:text-blue-400 transition-colors"></i>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        One call. 13 platforms. Text, images, video, carousels—scheduled or now.
+                    </p>
+                </div>
+
+                <div class="code-block rounded-2xl p-6 lg:p-8 hover-lift group cursor-pointer">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <span class="text-blue-400 font-mono text-sm font-bold">GET</span>
+                            <span class="text-slate-300 font-mono text-sm ml-2">/connect/{platform}</span>
+                        </div>
+                        <i data-lucide="link" class="w-5 h-5 text-slate-500 group-hover:text-purple-400 transition-colors"></i>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Let your users connect accounts. One OAuth flow, all platforms. No dev apps.
+                    </p>
+                </div>
+
+                <div class="code-block rounded-2xl p-6 lg:p-8 hover-lift group cursor-pointer">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <span class="text-blue-400 font-mono text-sm font-bold">GET</span>
+                            <span class="text-slate-300 font-mono text-sm ml-2">/analytics</span>
+                        </div>
+                        <i data-lucide="bar-chart-3" class="w-5 h-5 text-slate-500 group-hover:text-green-400 transition-colors"></i>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Likes, shares, reach, impressions, clicks, views. Unified across platforms.
+                    </p>
+                </div>
+
+                <div class="code-block rounded-2xl p-6 lg:p-8 hover-lift group cursor-pointer">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <span class="text-green-400 font-mono text-sm font-bold">POST</span>
+                            <span class="text-slate-300 font-mono text-sm ml-2">/webhooks/settings</span>
+                        </div>
+                        <i data-lucide="webhook" class="w-5 h-5 text-slate-500 group-hover:text-orange-400 transition-colors"></i>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Posts published? Failed? Get pinged instantly. No polling required.
+                    </p>
+                </div>
+
+                <div class="code-block rounded-2xl p-6 lg:p-8 hover-lift group cursor-pointer md:col-span-2">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <span class="text-blue-400 font-mono text-sm font-bold">GET</span>
+                            <span class="text-slate-300 font-mono text-sm ml-2">/inbox/conversations</span>
+                        </div>
+                        <i data-lucide="inbox" class="w-5 h-5 text-slate-500 group-hover:text-pink-400 transition-colors"></i>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        DMs, comments, reviews. One inbox for all platforms. Reply programmatically.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 lg:py-32 bg-slate-900/50">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
+                <p class="text-slate-400">Everything you need to know about SocioEasy</p>
+            </div>
+
+            <div class="space-y-4">
+                <div class="border border-slate-800 rounded-xl overflow-hidden bg-slate-800/30">
+                    <button class="faq-trigger w-full px-6 py-5 flex items-center justify-between text-left hover:bg-slate-800/50 transition-colors">
+                        <span class="font-medium text-slate-200">How fast can I integrate SocioEasy compared to building custom integrations?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 rotate-icon"></i>
+                    </button>
+                    <div class="faq-content px-6 pb-5">
+                        <p class="text-slate-400 text-sm leading-relaxed pt-2">
+                            Custom integrations take 8-12 months. SocioEasy takes under an hour.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="border border-slate-800 rounded-xl overflow-hidden bg-slate-800/30">
+                    <button class="faq-trigger w-full px-6 py-5 flex items-center justify-between text-left hover:bg-slate-800/50 transition-colors">
+                        <span class="font-medium text-slate-200">Do I need to create developer apps for each platform?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 rotate-icon"></i>
+                    </button>
+                    <div class="faq-content px-6 pb-5">
+                        <p class="text-slate-400 text-sm leading-relaxed pt-2">
+                            No. We handle all developer apps, approvals, and quota limits.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="border border-slate-800 rounded-xl overflow-hidden bg-slate-800/30">
+                    <button class="faq-trigger w-full px-6 py-5 flex items-center justify-between text-left hover:bg-slate-800/50 transition-colors">
+                        <span class="font-medium text-slate-200">How reliable is the scheduling?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 rotate-icon"></i>
+                    </button>
+                    <div class="faq-content px-6 pb-5">
+                        <p class="text-slate-400 text-sm leading-relaxed pt-2">
+                            We auto-transform content for each platform's requirements. Posts go out on time, every time.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="border border-slate-800 rounded-xl overflow-hidden bg-slate-800/30">
+                    <button class="faq-trigger w-full px-6 py-5 flex items-center justify-between text-left hover:bg-slate-800/50 transition-colors">
+                        <span class="font-medium text-slate-200">Is SocioEasy white-label friendly?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 rotate-icon"></i>
+                    </button>
+                    <div class="faq-content px-6 pb-5">
+                        <p class="text-slate-400 text-sm leading-relaxed pt-2">
+                            Yes. Your users never see SocioEasy branding.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="border border-slate-800 rounded-xl overflow-hidden bg-slate-800/30">
+                    <button class="faq-trigger w-full px-6 py-5 flex items-center justify-between text-left hover:bg-slate-800/50 transition-colors">
+                        <span class="font-medium text-slate-200">Can SocioEasy handle thousands of client accounts?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 rotate-icon"></i>
+                    </button>
+                    <div class="faq-content px-6 pb-5">
+                        <p class="text-slate-400 text-sm leading-relaxed pt-2">
+                            Yes. Scales to 5,000+ accounts, no changes needed.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 text-center">
+                <p class="text-slate-500 mb-4">Still have questions?</p>
+                <a href="mailto:support@socioeasy.dev" class="text-blue-400 hover:text-blue-300 font-medium">Contact Support →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 lg:py-32 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent pointer-events-none"></div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">Stop maintaining 13 integrations.</h2>
+            <p class="text-2xl md:text-3xl font-bold gradient-text mb-8">Start shipping features.</p>
+            <button onclick="showSignup()" class="bg-white text-slate-900 px-10 py-5 rounded-full text-lg font-bold hover:bg-slate-200 transition-all transform hover:scale-105 shadow-xl shadow-white/10 glow">
+                Get started
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800/50 py-12 bg-slate-900/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center space-x-2">
+                <span class="text-xl font-bold">✱</span>
+                <span class="font-semibold text-slate-300">SocioEasy</span>
+            </div>
+            
+            <div class="flex items-center space-x-6 text-sm text-slate-500">
+                <a href="#" class="hover:text-slate-300 transition-colors">Privacy</a>
+                <a href="#" class="hover:text-slate-300 transition-colors">Terms</a>
+                <a href="#" class="hover:text-slate-300 transition-colors">Status</a>
+            </div>
+
+            <div class="flex items-center space-x-2 text-slate-600">
+                <i data-lucide="shield-check" class="w-5 h-5"></i>
+                <span class="text-sm font-medium">GDPR Compliant</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeSignup()"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md p-6">
+            <div class="bg-slate-800 border border-slate-700 rounded-2xl p-8 relative">
+                <button onclick="closeSignup()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+                <h3 class="text-2xl font-bold mb-2">Get Started</h3>
+                <p class="text-slate-400 mb-6">Create your account to get your API key</p>
+                
+                <form onsubmit="handleSignup(event)" class="space-y-4">
+                    <input type="text" placeholder="Full Name" required
+                        class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg focus:outline-none focus:border-blue-500 text-white placeholder-slate-500">
+                    <input type="email" placeholder="Email" required
+                        class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg focus:outline-none focus:border-blue-500 text-white placeholder-slate-500">
+                    <input type="password" placeholder="Password" required
+                        class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg focus:outline-none focus:border-blue-500 text-white placeholder-slate-500">
+                    <button type="submit" class="w-full bg-white text-slate-900 py-3 rounded-lg font-semibold hover:bg-slate-200 transition-colors">
+                        Create Account
+                    </button>
+                </form>
+                
+                <p class="mt-4 text-center text-sm text-slate-500">
+                    Already have an account? <a href="#" class="text-blue-400 hover:text-blue-300">Sign in</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        document.querySelectorAll('.faq-trigger').forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                const content = trigger.nextElementSibling;
+                const icon = trigger.querySelector('.rotate-icon');
+                
+                document.querySelectorAll('.faq-content').forEach(c => {
+                    if (c !== content) c.classList.remove('active');
+                });
+                document.querySelectorAll('.rotate-icon').forEach(i => {
+                    if (i !== icon) i.classList.remove('active');
+                });
+                
+                content.classList.toggle('active');
+                icon.classList.toggle('active');
+            });
+        });
+
+        function showSignup() {
+            document.getElementById('signupModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSignup() {
+            document.getElementById('signupModal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function handleSignup(e) {
+            e.preventDefault();
+            alert('Welcome to SocioEasy! Check your email for API key.');
+            closeSignup();
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>
